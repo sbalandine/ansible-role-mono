@@ -1,0 +1,19 @@
+---
+- name: Add mono yum repo
+  yum_repository:
+    name: mono
+    baseurl: "{{ mono_yum_repo }}"
+    gpgkey: "{{ mono_yum_gpgkey }}"
+    description: "{{ mono_yum_description }}"
+    state: present
+
+- name: Install mono
+  yum:
+    name: "{{ mono_package }}"
+    state: latest
+
+- name: Install mono extra packages
+  yum:
+    name: "{{ mono_extra_packages }}"
+    state: latest
+  when: "mono_extra_packages is defined"

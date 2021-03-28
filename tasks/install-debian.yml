@@ -1,0 +1,33 @@
+---
+- name: Install gnupg for the apt_key module
+  apt:
+    name: gnupg2
+    update_cache: yes
+    state: latest
+
+- name: Add mono apt key
+  apt_key:
+    keyserver: "{{ mono_apt_keyserver }}"
+    id: "{{ mono_apt_key_id }}"
+    state: present
+  environment:
+    APT_KEY_DONT_WARN_ON_DANGEROUS_USAGE: 1
+
+- name: Add mono apt repo
+  apt_repository:
+    repo: "{{ mono_apt_repo }}"
+    state: present
+
+- name: Install mono
+  apt:
+    name: "{{ mono_package }}"
+    update_cache: yes
+    state: latest
+
+- name: Install mono extra packages
+  apt:
+    name: "{{ mono_extra_packages }}"
+    update_cache: yes
+    state: latest
+  when: "mono_extra_packages is defined"
+

@@ -1,0 +1,11 @@
+---
+- hosts: container
+  tasks:
+    - name: Copy hello.cs
+      copy:
+        src: hello.cs
+        dest: /tmp/
+    - name: Compile hello.cs
+      shell: mcs /tmp/hello.cs
+    - name: Run hello.exe
+      shell: mono /tmp/hello.exe

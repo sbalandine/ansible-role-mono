@@ -1,0 +1,4 @@
+---
+mono_apt_repo: "deb http://download.mono-project.com/repo/{{ ansible_distribution | lower }} {{ ansible_distribution_release }} main"
+mono_apt_keyserver: keyserver.ubuntu.com
+mono_apt_key_id: 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
